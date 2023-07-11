@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<link rel="stylesheet" href="../css/keobuabao.css">
+<body>
+    <div class="Khung">
+        <header> 
+            <h1>Máy</h1>
+               <a href="#" onclick="checkImage('may')">
+                  <img id="may" src="../image/chamhoi.jpg">
+               </a>
+            <br><br><br>
+            <input type="submit" onclick="doihinh()" name="start" value="Start">
+        </header>
+        <section>
+            <h1>Bạn chọn 1 cái nào</h1><br>
+            <a href="#" onclick="checkImage('keo')">
+                <img id="keo" src="../image/keo.jpg" > &nbsp;&nbsp;
+            </a>
+            <a href="#" onclick="checkImage('bua')">
+                  <img id="bua" src="../image/bua.jpg" > &nbsp;&nbsp; 
+            </a>
+            <a href="#" onclick="checkImage('bao')">
+                  <img id="bao" src="../image/bao.jpg">
+            </a>
+               <h2>Bạn chọn:
+               <p id="ketqua2"></h2></p><br>
+        </section><br><br><br>
+        
+        <footer><h1>Kết quả:
+         <p id="ketqua"></p></h1></footer>
+    </div>
+    <audio id="audioWin" src="../image/dung.mp3"></audio>
+    <audio id="audioHoa" src="../image/hoa.mp3"></audio>
+    <audio id="audioFalse" src="../image/sai.mp3"></audio>
+   <script>
+      var arrhinhanh = [
+         "../image/keo.jpg",
+         "../image/bua.jpg",
+         "../image/bao.jpg"
+      ];
+
+      function doihinh() {
+         var index = Math.floor(Math.random() * arrhinhanh.length);
+         var h = document.getElementById("may");
+         h.src = arrhinhanh[index];
+
+         var mayChon = arrhinhanh[index].split("/").pop().split(".")[0]; // Lấy tên hình may đã chọn (keo, bua, bao)
+         var nguoiChon = document.getElementById("ketqua2").textContent; // Lấy kết quả người chọn trước đó
+
+         // Xác định kết quả
+         if (mayChon == "keo" && nguoiChon == "bua") {
+            document.getElementById("ketqua").textContent = "Bạn thắng!";
+            playWinSound();
+         } else if (mayChon == "bua" && nguoiChon == "bao") {
+            document.getElementById("ketqua").textContent = "Bạn thắng!";
+            playWinSound();
+         } else if (mayChon == "bao" && nguoiChon == "keo") {
+            document.getElementById("ketqua").textContent = "Bạn thắng!";
+            playWinSound();
+         } else if (mayChon == nguoiChon) {
+            document.getElementById("ketqua").textContent = "Hòa!";
+             playHoaSound();
+         } else {
+            document.getElementById("ketqua").textContent = "Bạn thua!";
+             playFalseSound();
+         }
+      }
+
+      function checkImage(imageId) {
+         if (imageId === 'keo') {
+            // Xử lý khi người dùng chọn hình ảnh 'keo'
+            document.getElementById("ketqua2").textContent = "keo";
+         } else if (imageId === 'bua') {
+            // Xử lý khi người dùng chọn hình ảnh 'bua'
+            document.getElementById("ketqua2").textContent = "bua";
+         } else if (imageId === 'bao') {
+            // Xử lý khi người dùng chọn hình ảnh 'bao'
+            document.getElementById("ketqua2").textContent = "bao";
+         }
+      }
+
+      function playWinSound() {
+         var audioWin = document.getElementById("audioWin");
+         audioWin.play();
+      }
+       function playHoaSound() {
+         var audioWin = document.getElementById("audioHoa");
+         audioWin.play();
+      }
+       function playFalseSound() {
+         var audioWin = document.getElementById("audioFalse");
+         audioWin.play();
+      }
+   </script>
+</body>
+</html>
